@@ -38,8 +38,8 @@ app.post('/get-hello/', (req,res) => {
 app.post('/login', (req,res) =>{
   const name=calculateHelper.login(req.body);
 //   if(response.username!=null){
-  console.log(name.username);
-    res.status(200).send(`welcome ${name.username}`)
+  // console.log(name.username);
+    // res.status(200).send(`welcome ${name.username}`)
 // }
   
 })

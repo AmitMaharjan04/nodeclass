@@ -31,16 +31,15 @@ app.get('/get-hello/', (req, res) => {
 })
 
 
-app.post('/get-hello/', (req,res) => {
+app.post('/get-hello/', async(req,res) => {
   res.status(200).send(`sum of age is ${calculateHelper.sum(req.body.age1,req.body.age2)}`)
 })
 
-app.post('/login', (req,res) =>{
-  const name=calculateHelper.login(req.body);
-//   if(response.username!=null){
-  // console.log(name.username);
-    // res.status(200).send(`welcome ${name.username}`)
-// }
+app.post('/login', async(req,res) =>{
+  const name=await calculateHelper.login(req.body);
+  console.log(name);
+  res.status(200).send(`welcome ${name}`)
+
   
 })
 

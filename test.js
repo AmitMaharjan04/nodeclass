@@ -4,6 +4,7 @@ const port = 3002
 const bodyParser = require('body-parser') 
 const cors= require('cors');
 const calculateHelper=require('./calculateHelper')
+const authorization=require('./authorizationCheck')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -43,6 +44,25 @@ app.post('/login', async(req,res) =>{
   
 })
 
+app.post('/sign-up', (req,res) =>{
+  const email=req.body.email;
+  const password=req.body.password;
+  // let emailChecked= authorization.email(email);
+  // let passwordChecked=authorization.password(password);
+  //const check=authorization.checkExistingEmail(email);
+  const check2=authorization.validation(email,password);
+  // if(emailChecked ==true&& passwordChecked==true){
+  //     console.log("success")
+  // }
+  // console.log("incorrect")
+    //console.log(check)
+})
+app.post('/sign-in',(req,res) => {
+  const name=req.body.name;
+  const email=req.body.email;
+  const password=req.body.password;
+  authorization.newAccount(email,password);
+})
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

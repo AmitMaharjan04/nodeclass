@@ -53,8 +53,9 @@ async function addNewItem(){
 }
 // await addNewItem();
 const updateOrder= await addNewItem();
-if(updateOrder)
-    await getOrderItems();
+if(updateOrder){
+    const orderList=await getOrderItems();
+}
 // if(orderUpdate)
 //     await 
 // getOrderItems();

@@ -5,6 +5,9 @@ const bodyParser = require('body-parser')
 const cors= require('cors');
 const calculateHelper=require('./calculateHelper')
 const authorization=require('./authorizationCheck')
+const mysqlHelper=require('./mysqlHelper')
+require('dotenv').config();
+(process.env.MYSQL_DB_USER)
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -44,7 +47,7 @@ app.post('/login', async(req,res) =>{
   
 })
 
-app.post('/sign-up', (req,res) =>{
+app.post('/sign-in', (req,res) =>{
   const email=req.body.email;
   const password=req.body.password;
   // let emailChecked= authorization.email(email);
@@ -57,12 +60,20 @@ app.post('/sign-up', (req,res) =>{
   // console.log("incorrect")
     //console.log(check)
 })
-app.post('/sign-in',(req,res) => {
+app.post('/sign-up',(req,res) => {
   const name=req.body.name;
-  const email=req.body.email;
-  const password=req.body.password;
-  authorization.newAccount(email,password);
+  const address=req.body.address;
+  // const phone=req.body.phone;
+  const age=req.body.age;
+  const sql=`insert into user values('${name}','${address}',${age})`;
+  
+  const result=mysqlHelper.query(sql);
+  console.log(result)
+  // const email=req.body.email;
+  // const password=req.body.password;
+  // authorization.newAccount(email,password);
 })
 app.listen(port, () => {
+  mysqlHelper.connection();
   console.log(`Example app listening on port ${port}`)
 })
